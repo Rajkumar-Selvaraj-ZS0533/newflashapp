@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     # Read data from Excel file
-    excel_file_path = 'path/to/your/excel/file.xlsx'  # Replace with the actual path to your Excel file
+    excel_file_path = 'data/Demo.xlsx'  # Replace with the actual path to your Excel file
     df = pd.read_excel(excel_file_path)
 
     # Assuming the Excel file has columns named 'Category' and 'Value'
