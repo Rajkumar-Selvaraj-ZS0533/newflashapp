@@ -1,4 +1,5 @@
 from flask import Flask, send_file
+import pandas as pd
 import matplotlib.pyplot as plt
 from io import BytesIO
 
@@ -6,9 +7,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    # Sample data
-    categories = ['Category A', 'Category B', 'Category C']
-    values = [20, 35, 25]
+    # Read data from Excel file
+    excel_file_path = 'path/to/your/excel/file.xlsx'  # Replace with the actual path to your Excel file
+    df = pd.read_excel(excel_file_path)
+
+    # Assuming the Excel file has columns named 'Category' and 'Value'
+    categories = df['Category'].tolist()
+    values = df['Value'].tolist()
 
     # Create a bar chart
     plt.bar(categories, values)
