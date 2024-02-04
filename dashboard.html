@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Dashboard</title>
+    <!-- Include Plotly.js from CDN -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="barChart"></div>
+    <div id="pieChart"></div>
+
+    <script>
+        // Fetch data from the Flask API endpoint
+        fetch('/api/charts_data')
+            .then(response => response.json())
+            .then(data => {
+                // Create Bar Chart
+                Plotly.newPlot('barChart', [{
+                    type: 'bar',
+                    x: data.bar_chart.categories,
+                    y: data.bar_chart.values,
+                    marker: { color: 'blue' }
+                }], { title: 'Bar Chart' });
+
+                // Create Pie Chart
+                Plotly.newPlot('pieChart', [{
+                    type: 'pie',
+                    labels: data.pie_chart.categories,
+                    values: data.pie_chart.values
+                }], { title: 'Pie Chart' });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    </script>
+</body>
+</html>
